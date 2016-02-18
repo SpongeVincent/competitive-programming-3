@@ -1,44 +1,35 @@
-import java.io.*;
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Scanner;
+import java.lang.Math;
+import java.util.TreeSet;
 
-public class UVa11100 {
-
-    static int[] arr2;
-
-    public static void main(String[] args) throws IOException {
-        BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
-        PrintWriter out = new PrintWriter(new BufferedWriter(
-                new OutputStreamWriter(System.out)));
-        int bagsNum = Integer.parseInt(in.readLine().trim());
-        while (bagsNum > 0) {
-            StringTokenizer st = new StringTokenizer(in.readLine());
-            arr2 = new int[bagsNum];
-            for (int i = 0; i < bagsNum; i++) arr2[i] = Integer.parseInt(st.nextToken());
-            Arrays.sort(arr2);
-            int previous = arr2[0];
-            int max = 0;
-            int cnt = 0;
-            for (int i = 0; i < bagsNum; i++) {
-                int current = arr2[i];
-                if (current != previous) {
-                    max = cnt > max ? cnt : max;
-                    cnt = 1;
-                    previous = current;
-                } else cnt++;
-            }
-            max = cnt > max ? cnt : max;
-            out.println(max);
-            for (int i = 0; i < max; i++) {
-                out.print(arr2[i]);
-                for (int j = i + max; j < bagsNum; j += max) {
-                    out.print(" " + arr2[j]);
+public class UVa10038 {
+    public static void main(String[] args) {
+        Scanner in = new Scanner(System.in);
+        while(in.hasNextLine()){
+            String[] sequence = in.nextLine().split(" ");
+            TreeSet diffSet = new TreeSet();
+            Boolean isJolly = true;
+            int range = Integer.parseInt(sequence[0]);
+            for (int i=2; i<sequence.length; i++){
+                int diff = Math.abs(Integer.valueOf(sequence[i]) -
+                        Integer.valueOf(sequence[i-1]));
+                if(diff > range - 1 || diff < 1){
+                    isJolly = false;
+                    break;
+                }else{
+                    diffSet.add(diff);
                 }
-                out.print("\n");
             }
-            out.print("\n");
-            bagsNum = Integer.parseInt(in.readLine().trim());
+            if(diffSet.size() != range - 1){
+                isJolly = false;
+            }
+            if(isJolly){
+                System.out.println("Jolly");
+            }else {
+                System.out.println("Not jolly");
+            }
         }
-        out.flush();
-        out.close();
     }
 }
