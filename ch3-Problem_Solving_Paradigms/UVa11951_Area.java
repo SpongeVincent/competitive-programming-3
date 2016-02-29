@@ -2,7 +2,7 @@ import java.io.*;
 import java.util.Scanner;
 import java.util.StringTokenizer;
 
-public class UVa10827 {
+public class Main {
 
     static int N, M, layers, K, minCost, maxArea;
     static int[] temp;
