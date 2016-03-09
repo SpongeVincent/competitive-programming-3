@@ -1,6 +1,12 @@
 import java.io.*;
 import java.util.*;
 
+/* Idea: Build an adjacent graph, and then find all connected graph by using bfs. For each
+connected graph, if it touch both north and south edge, it means no way out. However, if the 
+graph touches the north edge and east or west edge, the lower touch point will be the exit 
+poit and entry point.
+Time complexity: O(n^2)
+*/
 class Main {
 
     static int n;
